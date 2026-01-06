@@ -49,6 +49,7 @@ function analyzeSalesData(data, options) {
         !Array.isArray(data.products) || data.products.length === 0 ||
         !Array.isArray(data.purchase_records) || data.purchase_records.length === 0 ) {
             throw new Error('Некорректные входные данные');
+        }
 
     // @TODO: Проверка наличия опций
     if (!calculateRevenue || typeof calculateRevenue !== 'function') {
@@ -91,7 +92,7 @@ function analyzeSalesData(data, options) {
                 seller.products_sold[item.sku] = 0;
             }
             // По артикулу товара увеличить его проданное количество у продавца
-            seller.products_sold[product.sku] += item.quantity;
+            seller.products_sold[item.sku] += item.quantity;
         });
     });
 
@@ -119,4 +120,4 @@ function analyzeSalesData(data, options) {
     top_products: seller.top_products,
     bonus: +seller.bonus.toFixed(2),
   }));
-}}
+}
